@@ -1,24 +1,30 @@
-import { FaReceipt, FaUserCircle } from 'react-icons/fa'
+import { FaReceipt } from 'react-icons/fa';
 import Link from 'next/link';
 
-export default function NavHeader(){
-    return(
-        <>
-            <div className=" w-full h-25 shadow-sm bg-white">
-                <div className=" w-5/6 m-auto h-full flex flex-row justify-between items-center">
-                    <h1 className="flex  flex-row uppercase text-red-500 font-bold text-4xl tracking-wide 0">
-                        <FaReceipt style={ {fontSize: '5x1'} } color='#555'/>
-                        EtiquetaFácil
-                    </h1>
-                    <ul className="flex flex-row gap-x-4 text-2xl uppercase tracking-wide font-medium">
-                        <li><Link href='/'>Sobre</Link></li>
-                        <li><Link href='/'>Preços</Link></li>
-                        <li><Link href='/'>Contato</Link></li>
-                        <li><Link className='shadow-sm w-full h-full border-1 rounded-2xl m-2 p-3' href='/'>
-                        Minha conta</Link></li>
-                    </ul>
-                </div>
-            </div>
-        </>
-    );
+export default function NavHeader() {
+  return (
+    <header className="w-full bg-white shadow-sm">
+      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        
+        <div className="flex items-center gap-2">
+          <FaReceipt size={32} className="text-red-500" />
+          <h1 className="text-2xl md:text-3xl font-bold uppercase tracking-wide text-red-500">
+            EtiquetaFácil
+          </h1>
+        </div>
+
+        <nav className="flex items-center gap-4 text-sm md:text-lg font-medium uppercase tracking-wide">
+          <Link href="/" className="hover:text-red-500">Sobre</Link>
+          <Link href="/" className="hover:text-red-500">Preços</Link>
+          <Link href="/" className="hover:text-red-500">Contato</Link>
+          <Link
+            href="/"
+            className="border border-gray-300 rounded-xl px-4 py-2 hover:bg-gray-100 transition"
+          >
+            Minha conta
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
 }
