@@ -2,7 +2,7 @@ import { FaReceipt } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       <main className="flex-grow" />
 
       <footer className="bg-white text-black py-10 border-t border-gray-200">
@@ -26,7 +26,7 @@ export default function Footer() {
               <li><a href="#como-funciona" className="hover:text-red-500">Como funciona</a></li>
               <li><a href="#planos" className="hover:text-red-500">Planos</a></li>
               <li><a href="#contato" className="hover:text-red-500">Contato</a></li>
-              <li><a href="https://wa.me/5533998573352" className="hover:text-red-500">FAQ</a></li>
+              <li><a href="#faq" className="hover:text-red-500">FAQ</a></li>
             </ul>
           </div>
 
