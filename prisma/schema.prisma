@@ -11,6 +11,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  
+enum Role {
+  USER 
+  ADMIN
+  MODERATOR
+  SUPORT
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+  cnpj      String   @unique
+  phone     String   @unique
+  addres    String
+  city      String
+  state     String
+  zipCode   String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products  Products[] 
+  labels    Labels[]   
+  logs      Logs[]  
+}
+
+model Products {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  name        String
+  description String
+  brand       String
+  category    String
+  default_Days Int
+  temperature Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  labels      Labels[]
+}
+
+model Labels {
+  id                Int      @id @default(autoincrement())
+  userId            Int
+  user              User     @relation(fields: [userId], references: [id])
+  productId         Int
+  product           Products @relation(fields: [productId], references: [id])
+  manufacture_Date  DateTime @default(now())
+  experation_Date   DateTime
+  status            String
+  createdAt         DateTime @default(now())
+}
+
+model Logs {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  action    String
+  details   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
