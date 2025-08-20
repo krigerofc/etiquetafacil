@@ -1,7 +1,5 @@
 import { Roboto } from 'next/font/google'
 
-import "./globals.css";
-import NavHeader from "../components/Layout/Nav/nav";
 
 const roboto = Roboto({
   weight: ['400', '700', '500', '300'],
@@ -13,11 +11,12 @@ export const metadata = {
   description: "Site de etiquetas para controle de validade",
 };
 
-export default function RootLayout({ children }) {
+export default function LoginLayout({ children }) {
   return (
     <html lang="pt-br">
       <body
-        className={roboto.className}>
+        className={roboto.className}
+      >
         {children}
       </body>
     </html>
