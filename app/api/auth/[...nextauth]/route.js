@@ -13,6 +13,26 @@ const handler = NextAuth({
 
         async authorize(credentials, req){
           return user// no limite
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
+          // implement
         }
     })
   ],
