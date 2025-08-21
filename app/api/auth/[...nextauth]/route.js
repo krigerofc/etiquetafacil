@@ -1,43 +1,47 @@
+import UserDatabase from "@/Backend/models/Database";
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { NextResponse } from "next/server";
+import bcrypt from "bcrypt";
 
 
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
         name: "Credentials",
+
         credentials:{
           email: { label: "Email", type: "text", placeholder: "Digite seu email" },
           password: { label: "Senha", type: "password", placeholder: "Digite sua senha" },
         },
 
-        async authorize(credentials, req){
-          return user// no limite
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
-          // implement
+        async authorize(credentials){
+          const { email, password } = credentials;
+          
+          if (!email || !password){
+            return null;
+          }
+
+          if (!/\S+@\S+\.\S+/.test(email)) {
+            return null;
+          }
+          
+          const user = await UserDatabase.FindUser(email.toLowerCase());
+          if (!user){
+            return null;
+          }
+
+          const IsPasswordCorrect = await bcrypt.compare(password, user.password)
+          if (!IsPasswordCorrect){
+            return null;
+          }   
+          
+          return user;
         }
     })
   ],
   pages:{
-    signIn: "/login",
+    signIn: "/Login",
     signOut: "/auth/signOut",
     error: "/auth/error", // Error code passed in query string as ?error=
     verifyRequest: "/auth/verify-request", // (used for check email message)

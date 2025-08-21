@@ -1,9 +1,12 @@
 "use client";
 import { useState } from "react";
 import { FaReceipt } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
 
+  const router = useRouter();
   // system
   const [Menu, SetMenu] = useState(0);
   const [Status, SetStatus] = useState("");
@@ -28,6 +31,22 @@ export default function LoginPage() {
       return;
     }
 
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: Email,
+      password: Password
+    });
+
+    if(res.ok){
+      router.push("/dashboard")
+      SetStatus("Login feito com sucesso!");
+      setTimeout(() => SetStatus("success"), 4000);
+      SetStatusType("");
+    } else {
+      SetStatus("E-mail ou senha inválidos.");
+      setTimeout(() => SetStatus(""), 4000);
+      SetStatusType("");
+    }
   }
 
   async function Register(e) {
@@ -65,6 +84,7 @@ export default function LoginPage() {
         SetStatus("Conta criada com sucesso!");
         SetStatusType("success");
         setTimeout(() => SetStatus(""), 4000);
+        SetMenu(0)
       }
       if(data.success == false){
         SetStatus(data.message);

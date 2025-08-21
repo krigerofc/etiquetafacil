@@ -7,7 +7,6 @@
             
             const bcrypt = require('bcrypt');
             const email_verify = email.toLowerCase();
-            const name_verify = name.toLowerCase();
             const hashedPassword = await bcrypt.hash(password, 10);
 
             // validation
