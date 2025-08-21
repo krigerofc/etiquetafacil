@@ -20,24 +20,60 @@ export default function LoginPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     if (!Email || !Password) {
       SetStatus("Preencha todos os campos!");
       setTimeout(() => SetStatus(""), 4000);
+      SetStatusType("");
       return;
     }
-    // lógica de login
+
   }
 
   async function Register(e) {
     e.preventDefault();
+
     if (!Email || !Password || !Cnpj || !Name || !ConfirmPassword) {
       SetStatus("Preencha todos os campos!");
       setTimeout(() => SetStatus(""), 4000);
+      SetStatusType("");
       return;
-
-    
     }
-    // lógica de registro
+
+      if( Password != ConfirmPassword){
+        SetStatus("Verifique sua senha!");
+        setTimeout(() => SetStatus(""), 4000);
+        SetStatusType("");
+        return;
+      }
+
+    const res = await fetch("/api/register",{
+      method: "POST",
+      body: JSON.stringify({ 
+        email: Email, 
+        password: Password,
+        confirmpassword: ConfirmPassword,
+        cnpj: Cnpj,
+        name: Name,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok){
+      if(data.success == true){
+        SetStatus("Conta criada com sucesso!");
+        SetStatusType("success");
+        setTimeout(() => SetStatus(""), 4000);
+      }
+      if(data.success == false){
+        SetStatus(data.message);
+        SetStatusType("");
+        setTimeout(() => SetStatus(""), 4000);
+      }
+    } else{
+      console.log("ERROR: ERROR IN RESPONSE")
+    }
   }
 
   return (
