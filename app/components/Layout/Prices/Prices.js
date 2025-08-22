@@ -13,7 +13,7 @@ export default function Prices(){
                 <h3 className="text-2xl font-bold text-red-500 mb-4">Básico</h3>
                 <p className="mb-6">Para quem está começando e precisa de algo simples.</p>
                 <ul className="space-y-3 text-left text-sm">
-                <li>✔️ Até 200 etiquetas/mês</li>
+                <li>✔️ Até 100 etiquetas/mês</li>
                 <li>✔️ Etiqueta inteligente</li>
                 <li>✔️ Modelos prontos</li>
                 <li>✔️ Alerta de vencimento</li>
@@ -39,7 +39,7 @@ export default function Prices(){
                 <h3 className="text-2xl font-bold text-red-500 mb-4">Profissional</h3>
                 <p className="mb-6">Para quem imprime etiquetas com frequência e quer mais controle.</p>
                 <ul className="space-y-3 text-left text-sm">
-                <li>✔️ Até 1500 etiquetas/mês</li>
+                <li>✔️ Até 500 etiquetas/mês</li>
                 <li>✔️ Etiqueta inteligente</li>
                 <li>✔️ Modelos prontos</li>
                 <li>✔️ Alertas de vencimento</li>
@@ -67,7 +67,7 @@ export default function Prices(){
                 <ul className="space-y-3 text-left text-sm">
                 <li>✔️ sem limite etiquetas/mês</li>
                 <li>✔️ Etiqueta inteligente</li>
-                <li>✔️ Modelos persoanlizados</li>
+                <li>✔️ Modelos prontos</li>
                 <li>✔️ Alertas de vencimento</li>
                 <li>✔️ Acesso via navegador</li>
                 <li>✔️ Atualizações automáticas do sistema</li>

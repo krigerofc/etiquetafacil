@@ -18,7 +18,7 @@ export default function NavHeader() {
           <Link href="/" className="hover:text-red-500">Preços</Link>
           <Link href="/" className="hover:text-red-500">Contato</Link>
           <Link
-            href="/"
+            href="/Login"
             className="border border-gray-300 rounded-xl px-4 py-2 hover:bg-gray-100 transition"
           >
             Minha conta

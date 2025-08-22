@@ -17,6 +17,16 @@ enum Role {
   SUPORT
 }
 
+model Plan {
+  id        Int    @id @default(autoincrement())
+  name      String @unique
+  price     Float
+  maxLabels Int    // limite de etiquetas
+  maxProducts Int? // se quiser limitar produtos também
+  features  String? // json/string com recursos extras
+  users     User[]
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
@@ -32,6 +42,8 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  planId    Int?
+  plan      Plan?    @relation(fields: [planId], references: [id])
   products  Products[] 
   labels    Labels[]   
   logs      Logs[]  

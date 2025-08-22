@@ -35,7 +35,7 @@ const handler = NextAuth({
           if (!IsPasswordCorrect){
             return null;
           }   
-          
+
           return user;
         }
     })
@@ -57,6 +57,10 @@ const handler = NextAuth({
       // Persist the user id to the token right after signin
       if (user) {
         token.id = user.id
+        token.cnpj = user.cnpj
+        token.name = user.name
+        token.email = user.email
+        token.role = user.role
       }
       return token
     },
