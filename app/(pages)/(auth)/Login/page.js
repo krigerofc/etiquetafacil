@@ -38,7 +38,7 @@ export default function LoginPage() {
     });
 
     if(res.ok){
-      router.push("/dashboard")
+      router.push("/Dashboard/Home")
       SetStatus("Login feito com sucesso!");
       setTimeout(() => SetStatus("success"), 4000);
       SetStatusType("");

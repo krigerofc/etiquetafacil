@@ -67,6 +67,9 @@ const handler = NextAuth({
     async session({ session, token }) {
       // Send properties to the client, like an access_token from a provider.
       session.user.id = token.id
+      session.user.name = token.name
+      session.user.cnpj = token.cnpj
+      session.user.email = token.email
       return session
     },
   },
