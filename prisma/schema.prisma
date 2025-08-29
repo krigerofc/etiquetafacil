@@ -55,6 +55,7 @@ model Products {
   user        User     @relation(fields: [userId], references: [id])
   name        String
   description String
+  responsible String
   brand       String
   category    String
   default_Days Int

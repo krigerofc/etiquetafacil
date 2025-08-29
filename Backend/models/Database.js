@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient
 
-class UserDatabase {
+class Database {
     static async CreateUser(data) {
         const { email, password, cnpj, name } = data;
 
@@ -37,6 +37,28 @@ class UserDatabase {
 
         return user
     }
+
+    static async CreateProduct(data){
+        const {name, description, responsible, brand, temperature, packaging, default_Days} = data;
+            
+        const tempNumber = Number(temperature);
+        const daysNumber = Number(default_Days);
+
+        const product = await prisma.products.create({
+            data:{
+                name, 
+                description,
+                responsible,
+                brand,
+                temperature: tempNumber,
+                packaging,
+                default_Days: daysNumber,
+            }
+        });
+
+        return product;
+    }
 }
 
-export default UserDatabase;
+
+export default Database;

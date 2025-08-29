@@ -1,4 +1,4 @@
-    import UserDatabase from "@/Backend/models/Database";
+    import { Database } from "@/Backend/models/Database";
     import { NextResponse } from "next/server";
 
     export async function POST(request) {
@@ -28,12 +28,12 @@
             if (!cnpj || cnpjNumbers.length !== 14) {
                 return NextResponse.json({ Message: "CNPJ inválido!", success:false });}
 
-            const existingUser = await UserDatabase.FindUser(email.toLowerCase())
-            const existinCnpj = await UserDatabase.FindCnpj(cnpj)
+            const existingUser = await Database.FindUser(email.toLowerCase())
+            const existinCnpj = await Database.FindCnpj(cnpj)
             if(existingUser){ return NextResponse.json({ message: "Email já cadastrado", success:false }) }
             if(existinCnpj){ return NextResponse.json({ message: "Cnpj já cadastrado", success:false}) }
 
-            const user = await UserDatabase.CreateUser({
+            const user = await Database.CreateUser({
                 email: email.toLowerCase(),
                 password: hashedPassword,
                 cnpj: cnpj,

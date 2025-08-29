@@ -19,7 +19,7 @@ export default function NavDash() {
 
     return (
         <>
-        <div className="sm:hidden flex justify-between items-center p-4 bg-gray-50 border-b border-gray-200">
+        <div className="sm:hidden flex justify-between items-center p-4 bg-gray-50 border-b border-gray-200 n">
             <Profile />
             <button
                 onClick={() => setMenuOpen(!menuOpen)}

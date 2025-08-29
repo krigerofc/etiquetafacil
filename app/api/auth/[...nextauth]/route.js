@@ -1,4 +1,4 @@
-import UserDatabase from "@/Backend/models/Database";
+import Database from "@/Backend/models/Database";
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { NextResponse } from "next/server";
@@ -26,7 +26,7 @@ const handler = NextAuth({
             return null;
           }
           
-          const user = await UserDatabase.FindUser(email.toLowerCase());
+          const user = await Database.FindUser(email.toLowerCase());
           if (!user){
             return null;
           }
