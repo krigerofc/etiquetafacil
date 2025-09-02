@@ -8,9 +8,8 @@ export default function Profile(){
 
     const { data: session, status } = useSession();
 
-    if (!session){
-        return
-    }
+    if (status === "loading") return <div>Carregando...</div>;
+    if (!session) return <div>Acesso negado</div>;
 
     return(
         <div className="w-full h-28 bg-gray-50 shadow-sm rounded-sm flex items-center p-4">

@@ -39,7 +39,7 @@ class Database {
     }
 
     static async CreateProduct(data){
-        const {name, description, responsible, brand, temperature, packaging, default_Days} = data;
+        const {name, description, responsible, brand, temperature, default_Days, userId} = data;
             
         const tempNumber = Number(temperature);
         const daysNumber = Number(default_Days);
@@ -51,12 +51,22 @@ class Database {
                 responsible,
                 brand,
                 temperature: tempNumber,
-                packaging,
                 default_Days: daysNumber,
+                userId: userId,
             }
         });
 
         return product;
+    }
+
+    static async Search_all_products(userId){
+        const products = await prisma.products.findMany({
+            where: {
+                userId: userId
+            }
+        });
+
+        return products
     }
 }
 

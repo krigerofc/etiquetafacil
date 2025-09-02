@@ -57,7 +57,6 @@ model Products {
   description String
   responsible String
   brand       String
-  category    String
   default_Days Int
   temperature Int
   createdAt   DateTime @default(now())

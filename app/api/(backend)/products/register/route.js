@@ -1,11 +1,11 @@
-import { ProductDatabase } from "@/Backend/models/Database";
 import { NextResponse } from "next/server";
+import Database from "@/Backend/models/Database";
 
 export async function POST(req) {
     try{
-    const {name, description, responsible, brand, temperature, packaging, default_Days} = await req.json();
+    const {name, description, responsible, brand, temperature, default_Days, userId} = await req.json();
 
-    if(!name || !description || !responsible || !brand || !temperature || !packaging || !default_Days){
+    if(!name || !description || !responsible || !brand || !temperature  || !default_Days || !userId){
         return NextResponse.json({Message: "Preencha todas as informações.", success: false})
     }
 
@@ -17,14 +17,14 @@ export async function POST(req) {
     return NextResponse.json({Message: "Algum campo excede o tamanho permitido.", success: false});
     }
 
-    const product = ProductDatabase.CreateProduct({
+    const product = Database.CreateProduct({
         name: name,
         description: description,
         responsible: responsible,
         brand: brand,
         temperature: temperature,
-        packaging: packaging,
-        default_Days: default_Days})
+        default_Days: default_Days,
+        userId: userId})
 
     if (product){
         return NextResponse.json({message: "Produto criado com sucesso!", success: true})
