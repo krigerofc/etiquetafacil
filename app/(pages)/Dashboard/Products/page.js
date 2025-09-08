@@ -45,9 +45,9 @@ export default function Products(){
     return(
         <Providers>
             <div className=" flex min-h-screen">
-                <NavDash className="w-1/4"/>
+                <NavDash/>
 
-                <div className="w-3/4 flex flex-col gap-4 p-4">
+                <div className="w-4/4 flex flex-col gap-4 p-4">
                     <ProductHeader/>
                     <ProductsList products={products_list}/>
                 </div>

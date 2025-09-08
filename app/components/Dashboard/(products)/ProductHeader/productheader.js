@@ -50,7 +50,7 @@ export default function ProductHeader() {
   return (
     <div className="w-full mt-5 mb-5 px-2 sm:px-0">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <h1 className="font-medium uppercase tracking-wide text-2xl sm:text-4xl text-gray-800">
+        <h1 className="font-medium uppercase tracking-wide text-2xl sm:text-4xl text-gray-800 pt-1">
           Gerenciamento de Produtos
         </h1>
 

@@ -1,32 +1,47 @@
-
-'use client'
+'use client';
 
 import { useSession } from "next-auth/react";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaCog } from "react-icons/fa";
+import Link from "next/link";
 
-export default function Profile(){
+export default function Profile() {
+  const { data: session, status } = useSession();
 
-    const { data: session, status } = useSession();
-
-    if (status === "loading") return <div>Carregando...</div>;
-    if (!session) return <div>Acesso negado</div>;
-
-    return(
-        <div className="w-full h-28 bg-gray-50 shadow-sm rounded-sm flex items-center p-4">
-            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 items-center">
-                <FaUserCircle className="hidden sm:block" size={60} />
-                
-                <ul className="text-center sm:text-left">
-                    <li>
-                        <h1 className="uppercase tracking-wide text-base sm:text-lg md:text-xl">
-                            {session.user.name}
-                        </h1>
-                    </li>
-                    <li>
-                        <p className="text-gray-400 text-sm sm:text-base">{session.user.cnpj}</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  if (status === "loading") {
+    return (
+      <div className="w-full bg-gray-50 rounded-lg shadow-sm p-4 text-gray-500">
+        Carregando perfil...
+      </div>
     );
+  }
+
+  if (!session) {
+    return (
+      <div className="w-full bg-gray-50 rounded-lg shadow-sm p-4 text-red-500">
+        Acesso negado
+      </div>
+    );
+  }
+
+  return (
+    <Link href="/Dashboard/Profile" className="block w-full">
+      <div className="w-full bg-gray-50 rounded-lg shadow-sm p-4 flex items-center justify-between hover:bg-gray-100 transition-all cursor-pointer">
+        {/* Avatar + Dados */}
+        <div className="flex items-center gap-4">
+          <FaUserCircle className="text-red-500" size={48} />
+          <div className="flex flex-col">
+            <h1 className="text-base sm:text-lg font-semibold text-gray-800 leading-tight">
+              {session.user.name || "TESTETECH LTDA"}
+            </h1>
+            <p className="text-sm text-gray-500">
+              {session.user.cnpj || "00.000.000/0001-91"}
+            </p>
+          </div>
+        </div>
+
+        {/* Ícone de engrenagem */}
+        <FaCog className="text-red-500" size={22} />
+      </div>
+    </Link>
+  );
 }
