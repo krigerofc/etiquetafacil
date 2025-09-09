@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient
+const prisma = new PrismaClient();
 
 class Database {
     static async CreateUser(data) {
@@ -38,6 +38,13 @@ class Database {
         return user
     }
 
+
+
+
+
+
+
+
     static async CreateProduct(data){
         const {name, description, responsible, brand, temperature, default_Days, userId} = data;
             
@@ -67,6 +74,37 @@ class Database {
         });
 
         return products
+    }
+
+    static async DeleteProduct(Id_product, userId){
+        const deleted = await prisma.products.deleteMany({
+            where:{
+                id: Id_product,
+                userId: userId
+            }
+        });
+
+        return deleted;
+    }
+
+    static async EditProduct(id, name, description, responsible, brand, temperature, default_Days, userId) {
+        const updated = await prisma.products.update({
+            where: { id: id },
+            data: {
+                name,
+                description,
+                responsible,
+                brand,
+                temperature: Number(temperature),
+                default_Days: Number(default_Days),
+            }
+        });
+
+        if (updated.userId !== userId) {
+            throw new Error("Você não tem permissão para editar este produto");
+        }
+
+        return updated; // 🔥 retorna o objeto atualizado
     }
 }
 
