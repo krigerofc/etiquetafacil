@@ -23,7 +23,7 @@ export default function PainelEtiquetasRecentes() {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="w-full max-w-full text-center mx-auto bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-xl font-semibold mb-4">Etiquetas Impressas Recentemente</h2>
 
       {etiquetas.length === 0 ? (

@@ -24,7 +24,6 @@ export default function Products(){
                     })
                 });
                 const data = await res.json();
-                console.log("Resposta da API:", data);
                 if (data.success) {
                     console.log(data.success)
                     setProducts(data.products);
@@ -39,7 +38,7 @@ export default function Products(){
         Get_products();
     }, [session])
 
-    if (!session) return <div>Acesso negado</div>;
+    if (!session) return;
     if (status === "loading") return <LoadingScreen/>;
     if (loading) return <LoadingScreen/>;
 

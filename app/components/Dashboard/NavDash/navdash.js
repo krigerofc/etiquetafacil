@@ -9,7 +9,7 @@ export default function SidebarNav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
-    { href: "/Dashboard/Home", label: "Início", icon: <FaHome /> },
+    { href: "/Dashboard/Home", label: "Dashboard", icon: <FaHome /> },
     { href: "/Dashboard/Products", label: "Produtos", icon: <FaBoxOpen /> },
     { href: "/Dashboard/Label", label: "Etiquetas", icon: <FaTags /> },
   ];

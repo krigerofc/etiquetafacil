@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function ConfigLabel({ onConfirm }) {
+export default function ConfigLabel({ Print}) {
   const [tipo, setTipo] = useState('termica');
   const [tamanho, setTamanho] = useState('5x7');
   const [quantidade, setQuantidade] = useState(1);
@@ -12,17 +12,18 @@ export default function ConfigLabel({ onConfirm }) {
     a4: ['5x7', '6x8', '4x6'],
   };
 
-  function confirmarConfiguracao() {
+  function PrePrint() {
     const config = {
-      tipo,
+      tipo, // A4 ou termica
       tamanho,
       quantidade,
     };
-    onConfirm(config);
+    
+    Print(config);
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto">
+  <div className="bg-white p-6 rounded-lg shadow-md w-3/4">
       <h2 className="text-xl font-semibold mb-4">Configuração de Etiqueta</h2>
 
       <div className="mb-4">
@@ -33,7 +34,7 @@ export default function ConfigLabel({ onConfirm }) {
           className="w-full border rounded px-3 py-2"
         >
           <option value="termica">Impressora Térmica</option>
-          <option value="a4">Folha A4</option>
+          <option value="A4">Folha A4</option>
         </select>
       </div>
 
@@ -62,7 +63,7 @@ export default function ConfigLabel({ onConfirm }) {
       </div>
 
       <button
-        onClick={confirmarConfiguracao}
+        onClick={PrePrint}
         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
       >
         Confirmar Impressão
