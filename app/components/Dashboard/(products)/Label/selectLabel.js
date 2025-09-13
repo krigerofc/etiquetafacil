@@ -27,7 +27,7 @@ export default function SelectProduct({ produtos, ProductConfirm }) {
     : [];
 
   return (
-    <div className="w-full bg-white p-6 rounded-lg shadow-md">
+    <div className="w-full bg-white p-6 rounded-lg shadow-md max-h-[700px] overflow-y-hidden">
       <div className="flex items-center gap-2 mb-6">
         <FaBoxOpen className="text-red-500 text-2xl" />
         <h2 className="text-2xl font-semibold text-gray-800">Selecionar Produtos</h2>
@@ -44,7 +44,7 @@ export default function SelectProduct({ produtos, ProductConfirm }) {
         />
       </div>
 
-      <div className="flex flex-col gap-4">
+     <div className="flex flex-col gap-4 max-h-[700px] overflow-y-auto pr-2">
         {produtosFiltrados.map((produto) => {
           const ativo = selecionados.some(p => p.id === produto.id);
           return (

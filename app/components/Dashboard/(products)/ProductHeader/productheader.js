@@ -38,6 +38,7 @@ export default function ProductHeader() {
     if (res.ok){
         if(data.success){
             setFeedback({ message: "Produto criado com sucesso!", type: "success" });
+            
         } else {
             setFeedback({ message: "Erro ao criar produto!", type: "error" });
         }
