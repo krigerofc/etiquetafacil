@@ -1,5 +1,6 @@
 'use client'
 
+import LoadingScreen from "@/app/components/default/LoadingScreen/Loading";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
@@ -17,8 +18,8 @@ export default function ProductHeader() {
   const [temperature, setTemperature] = useState("");
   const [default_Days, setdefault_Days] = useState("");
 
-  if (status === "loading") return <div>Carregando...</div>;
-  if (!session) return <div>Acesso negado</div>;
+    if (!session) return <div>Acesso negado</div>;
+    if (status === "loading") return <LoadingScreen/>;
 
   const OpenMenu = () => setMenu(true);
   const CloseMenu = () => setMenu(false);

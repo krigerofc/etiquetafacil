@@ -3,23 +3,17 @@
 import { useSession } from "next-auth/react";
 import { FaUserCircle, FaCog } from "react-icons/fa";
 import Link from "next/link";
+import LoadingScreen from "../../default/LoadingScreen/Loading";
 
 export default function Profile() {
   const { data: session, status } = useSession();
 
-  if (status === "loading") {
-    return (
-      <div className="w-full bg-gray-50 rounded-lg shadow-sm p-4 text-gray-500">
-        Carregando perfil...
-      </div>
-    );
-  }
+  if (!session) return;
+  if (status === "loading") return <LoadingScreen/>;
 
   if (!session) {
     return (
-      <div className="w-full bg-gray-50 rounded-lg shadow-sm p-4 text-red-500">
-        Acesso negado
-      </div>
+      <LoadingScreen/>
     );
   }
 

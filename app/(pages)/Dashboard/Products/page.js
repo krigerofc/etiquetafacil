@@ -3,6 +3,7 @@
 import ProductHeader from "@/app/components/Dashboard/(products)/ProductHeader/productheader";
 import ProductsList from "@/app/components/Dashboard/(products)/ProductsList/productslist";
 import NavDash from "@/app/components/Dashboard/NavDash/navdash";
+import LoadingScreen from "@/app/components/default/LoadingScreen/Loading";
 
 import { Providers } from "@/app/providers";
 import { useSession } from "next-auth/react";
@@ -39,8 +40,8 @@ export default function Products(){
     }, [session])
 
     if (!session) return <div>Acesso negado</div>;
-    if (status === "loading") return <div>Carregando...</div>;
-    if (loading) return <div>Carregando produtos...</div>;
+    if (status === "loading") return <LoadingScreen/>;
+    if (loading) return <LoadingScreen/>;
 
     return(
         <Providers>
