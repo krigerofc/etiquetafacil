@@ -106,6 +106,26 @@ class Database {
 
         return updated; // 🔥 retorna o objeto atualizado
     }
+
+
+    // label
+    // status =  Expired, Alert, Good
+    static async CreateLabel(userId, ProductId, amount, experation_Date, status) {
+    const validStatuses = ['Expired', 'Alert', 'Good'];
+    if (!validStatuses.includes(status)) return null;
+
+    const labels = await prisma.labels.create({
+        data: {
+        userId: userId,
+        productId: ProductId,
+        amount: amount,
+        experation_Date: experation_Date,
+        status: status
+        }
+    });
+
+    return labels;
+    }
 }
 
 

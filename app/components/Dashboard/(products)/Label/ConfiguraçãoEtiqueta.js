@@ -34,7 +34,7 @@ export default function ConfigLabel({ Print}) {
           className="w-full border rounded px-3 py-2"
         >
           <option value="termica">Impressora Térmica</option>
-          <option value="A4">Folha A4</option>
+          <option value="a4">Folha A4</option>
         </select>
       </div>
 

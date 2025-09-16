@@ -2,12 +2,15 @@
 import { useState } from "react";
 import { FaReceipt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
+
 
 export default function LoginPage() {
 
   const router = useRouter();
   // system
+  const { data: session, status} = useSession();
   const [Menu, SetMenu] = useState(0);
   const [Status, SetStatus] = useState("");
   const [StatusType, SetStatusType] = useState("");
@@ -95,6 +98,12 @@ export default function LoginPage() {
       console.log("ERROR: ERROR IN RESPONSE")
     }
   }
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/Dashboard/Home");
+    }
+  }, [status]);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">

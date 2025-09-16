@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { FaBoxOpen, FaCheckCircle, FaSearch } from 'react-icons/fa';
 
-export default function SelectProduct({ produtos, ProductConfirm }) {
+export default function SelectProduct({ produtos, onSelecionadosChange }) {
   const [selecionados, setSelecionados] = useState([]);
   const [busca, setBusca] = useState('');
 
@@ -14,9 +14,10 @@ export default function SelectProduct({ produtos, ProductConfirm }) {
       : [...selecionados, produto];
 
     setSelecionados(novaLista);
-    if (typeof ProductConfirm === 'function') {
+    if (typeof onSelecionadosChange === 'function') {
       onSelecionadosChange(novaLista);
     }
+    console.log(selecionados)
   }
 
   const produtosFiltrados = Array.isArray(produtos)
@@ -27,7 +28,7 @@ export default function SelectProduct({ produtos, ProductConfirm }) {
     : [];
 
   return (
-    <div className="w-full bg-white p-6 rounded-lg shadow-md max-h-[700px] overflow-y-hidden">
+    <div className="w-full bg-white p-6 rounded-lg shadow-md max-h-[700px] overflow-y-hidden mt-8">
       <div className="flex items-center gap-2 mb-6">
         <FaBoxOpen className="text-red-500 text-2xl" />
         <h2 className="text-2xl font-semibold text-gray-800">Selecionar Produtos</h2>

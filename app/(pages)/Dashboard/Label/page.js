@@ -2,12 +2,13 @@
 
 import ConfigLabel from "@/app/components/Dashboard/(products)/Label/ConfiguraçãoEtiqueta";
 import PainelEtiquetasRecentes from "@/app/components/Dashboard/(products)/Label/EtiquetasRecentes";
+import Etiqueta from "@/app/components/Dashboard/(products)/Label/label";
 import SelectProduct from "@/app/components/Dashboard/(products)/Label/selectLabel";
 import NavDash from "@/app/components/Dashboard/NavDash/navdash";
 import LoadingScreen from "@/app/components/default/LoadingScreen/Loading";
 import { Providers } from "@/app/providers";
 import { useSession } from "next-auth/react";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LabelPage() {
 
@@ -15,8 +16,26 @@ export default function LabelPage() {
   const [produtosSelecionados, setProdutosSelecionados] = useState([]);
   const {data: session, status} = useSession();
 
-  async function ConfirmPrint(){
 
+async function ConfirmPrint(config) {
+  
+
+  const res = await fetch('/api/labels/register', {
+    method:"POST",
+    body:JSON.stringify({
+      userId:session.user.id,
+      Products:produtosSelecionados,
+      amount:config.quantidade
+    })
+  });
+
+  const data = await res.json();
+  
+  if(data){
+    console.log(data)
+  } else{
+    console.log("Deu errado")
+  }
   }
 
 useEffect(() => {
