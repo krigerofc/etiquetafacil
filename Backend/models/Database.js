@@ -108,9 +108,15 @@ class Database {
     }
 
 
+
     // label
+
+
+
+
+    
     // status =  Expired, Alert, Good
-    static async CreateLabel(userId, ProductId, amount, experation_Date, status) {
+    static async CreateLabel(userId, ProductId, nome, amount, experation_Date, status) {
     const validStatuses = ['Expired', 'Alert', 'Good'];
     if (!validStatuses.includes(status)) return null;
 
@@ -118,6 +124,7 @@ class Database {
         data: {
         userId: userId,
         productId: ProductId,
+        name:nome,
         amount: amount,
         experation_Date: experation_Date,
         status: status
@@ -125,6 +132,28 @@ class Database {
     });
 
     return labels;
+    }
+
+    static async Search_Labels(userId){
+        try{ 
+            if(!userId) return null
+
+            const labels = await prisma.labels.findMany({
+                where:{
+                        userId:userId
+                },
+                orderBy:{
+                    createdAt:'desc'
+                }
+            })
+
+            if(!labels) return null
+
+            return labels
+        } catch(error){
+            return error
+        }
+        
     }
 }
 

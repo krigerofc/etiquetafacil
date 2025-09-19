@@ -71,6 +71,7 @@ model Labels {
   user              User     @relation(fields: [userId], references: [id])
   productId         Int
   product           Products @relation(fields: [productId], references: [id])
+  name              String?
   amount           Int
   manufacture_Date  DateTime @default(now())
   experation_Date   DateTime

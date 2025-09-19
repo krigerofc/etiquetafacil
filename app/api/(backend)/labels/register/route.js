@@ -9,8 +9,6 @@ export async function POST(req){
         if(!userId || !Products || !amount){
             return NextResponse.json({Message:"ERROR, Informações faltando.",});
         }
-        console.log("Products recebidos:", Products);
-
 
         const IntAmount = parseInt(amount);
         const data_now = new Date();
@@ -23,9 +21,7 @@ export async function POST(req){
         const result_days = new Date(data_now);
         result_days.setDate(result_days.getDate() + p.default_Days);
 
-        const label = await Database.CreateLabel(userId, p.id, IntAmount, result_days,"Good" );
-
-
+        const label = await Database.CreateLabel(userId, p.id, p.name,  IntAmount, result_days,"Good" );
 
         if (!label) {
           resultados.push({ produtoId: p.id, status: "erro", motivo: "Falha ao criar etiqueta" });
