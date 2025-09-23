@@ -22,7 +22,7 @@ export default function ProductTable({ products, setDeleteItem, setEditItem }) {
             <td className="px-4 py-2 max-w-[120px] truncate">{p.brand}</td>
             <td className="px-4 py-2 max-w-[100px] truncate">{p.default_Days}</td>
             <td className="px-4 py-2 max-w-[100px] truncate">{p.temperature}</td>
-            <td className="px-4 py-2 max-w-[140px] truncate">{p.createdAt}</td>
+            <td className="px-4 py-2 max-w-[140px] truncate">{new Date(p.createdAt).toLocaleDateString('pt-BR')}</td>
             <td className="px-4 py-2">
               <button className="flex items-center justify-center w-full px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition" onClick={() => setEditItem(p)}>
                 <MdEdit size={18} />

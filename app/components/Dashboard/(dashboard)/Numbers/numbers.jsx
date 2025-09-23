@@ -15,12 +15,12 @@ export default function RevenueCard({ title, value}) {
     
   return (
     <div className="bg-white text-black rounded-xl p-6 w-full max-w-md shadow-lg">
-      <h2 className="text-sm uppercase tracking-wide text-black">{title}</h2>
+      <h2 className="text-sm uppercase tracking-wide text-black font-">{title}</h2>
       <div className="text-3xl font-bold mt-1">{ value }</div>
       {value > 0 ?(
-        <div className="text-green-600 text-sm mt-1">Monitore seus dados em tempo real</div>
+        <div className="text-green-600 text-sm mt-1 font-medium upp">Monitore seus dados em tempo real</div>
       ) : (
-        <div className="text-red-400 text-sm mt-1">Monitore seus dados em tempo real</div>
+        <div className="text-red-400 text-sm mt-1 font-bold uppercase">Comece agora mesmo!</div>
       )}
 
       <div className="mt-6 h-24">

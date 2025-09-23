@@ -163,8 +163,11 @@ class Database {
     static async DashboardData(userId){
         try{
             if(!userId) return null
-            const threeMonthsAgo = new Date();
-            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+            const startOfToday = new Date();
+            startOfToday.setHours(0, 0, 0, 0);
+
+            const endOfToday = new Date();
+            endOfToday.setHours(23, 59, 59, 999);
 
             const productsCount = await prisma.products.count({
                 where: ({ 
@@ -176,11 +179,21 @@ class Database {
                 where: ({ userId: userId})
             })
 
-            if(!productsCount || !labelCount){
+            const labelCount_today = await prisma.labels.count({
+                where: ({ 
+                    userId: userId,
+                    createdAt:{
+                        gte: startOfToday,
+                        lte: endOfToday
+                    }
+                })
+            })
+
+            if(!productsCount || !labelCount || !labelCount_today){
                 return null;
             }
 
-            return {productsCount, labelCount};
+            return {productsCount, labelCount, labelCount_today};
         } catch(err){
             return err
         }

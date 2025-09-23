@@ -35,7 +35,7 @@ export default function PainelEtiquetasRecentes() {
   }
 
   return (
-    <div className="max-h-[500px] w-full max-w-full text-center mx-auto bg-white p-6 rounded-lg shadow-md overflow-y-auto mt-8">
+    <div className="max-h-[500px] w-full max-w-full text-center mx-auto bg-white p-6 rounded-lg shadow-md overflow-y-auto">
       <h2 className="text-xl font-semibold mb-4">Etiquetas Impressas Recentemente</h2>
 
       {etiquetas.length === 0 ? (
