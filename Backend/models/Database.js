@@ -155,6 +155,36 @@ class Database {
         }
         
     }
+
+
+
+    // dashboard
+
+    static async DashboardData(userId){
+        try{
+            if(!userId) return null
+            const threeMonthsAgo = new Date();
+            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+
+            const productsCount = await prisma.products.count({
+                where: ({ 
+                    userId: userId,
+                })
+            });
+
+            const labelCount = await prisma.labels.count({
+                where: ({ userId: userId})
+            })
+
+            if(!productsCount || !labelCount){
+                return null;
+            }
+
+            return {productsCount, labelCount};
+        } catch(err){
+            return err
+        }
+    }
 }
 
 

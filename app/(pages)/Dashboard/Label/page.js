@@ -1,9 +1,9 @@
 'use client'
 
-import ConfigLabel from "@/app/components/Dashboard/(products)/Label/ConfiguraçãoEtiqueta";
-import PainelEtiquetasRecentes from "@/app/components/Dashboard/(products)/Label/EtiquetasRecentes";
-import Etiqueta from "@/app/components/Dashboard/(products)/Label/label";
-import SelectProduct from "@/app/components/Dashboard/(products)/Label/selectLabel";
+import ConfigLabel from "@/app/components/Dashboard/(label)/Label/ConfiguraçãoEtiqueta";
+import PainelEtiquetasRecentes from "@/app/components/Dashboard/(label)/Label/EtiquetasRecentes";
+import Etiqueta from "@/app/components/Dashboard/(label)/Label/label";
+import SelectProduct from "@/app/components/Dashboard/(label)/Label/selectLabel";
 import NavDash from "@/app/components/Dashboard/NavDash/navdash";
 import LoadingScreen from "@/app/components/default/LoadingScreen/Loading";
 import { Providers } from "@/app/providers";
