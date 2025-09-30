@@ -12,6 +12,7 @@ import { useReactToPrint } from "react-to-print";
 import { Providers } from "@/app/providers";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
+import Feedback from "@/app/components/Config/FeedBack/feedback";
 
 
 export default function LabelPage() {
@@ -21,14 +22,21 @@ export default function LabelPage() {
   const {data: session, status} = useSession();
 
   const contentRef = useRef(null);
-  const  PrintLabel = useReactToPrint({ contentRef });
+  const PrintLabel = useReactToPrint({ contentRef })
+  const [feedback, setFeedback] = useState({ message: "", type: "" });
+
+  function teste(){
+    
+    if(session.user.phone == null || session.user.address == null){
+       return setFeedback({ message: "Preencha todos os dados do usuario em configurações", type: "error" });
+    }
+    PrintLabel();
+    ConfirmPrint();
+  }
 
 
 async function ConfirmPrint(config) {
 
-  
-  
-  /*
   const res = await fetch('/api/labels/register', {
     method:"POST",
     body:JSON.stringify({
@@ -46,7 +54,6 @@ async function ConfirmPrint(config) {
   } else{
     console.log("Deu errado")
   }
-  */
   }
 
 useEffect(() => {
@@ -76,6 +83,7 @@ useEffect(() => {
 
   return (
     <Providers>
+      <Feedback message={feedback.message} type={feedback.type} />
       <div className="flex min-h-screen">
         <NavDash />
 
@@ -83,7 +91,7 @@ useEffect(() => {
 
           <div className="flex flex-col md:flex-row gap-6">
             <div className="md:w-1/3">
-              <ConfigLabel Print={() => {ConfirmPrint(), PrintLabel()}}/>
+              <ConfigLabel Print={() => {teste()}}/>
             </div>
             <div className="md:w-2/3">
               <PainelEtiquetasRecentes/>
