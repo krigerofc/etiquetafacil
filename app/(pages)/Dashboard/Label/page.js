@@ -6,9 +6,13 @@ import Etiqueta from "@/app/components/Dashboard/(label)/Label/label";
 import SelectProduct from "@/app/components/Dashboard/(label)/Label/selectLabel";
 import NavDash from "@/app/components/Dashboard/NavDash/navdash";
 import LoadingScreen from "@/app/components/default/LoadingScreen/Loading";
+
+
+import { useReactToPrint } from "react-to-print";
 import { Providers } from "@/app/providers";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
 
 export default function LabelPage() {
 
@@ -16,10 +20,15 @@ export default function LabelPage() {
   const [produtosSelecionados, setProdutosSelecionados] = useState([]);
   const {data: session, status} = useSession();
 
+  const contentRef = useRef(null);
+  const  PrintLabel = useReactToPrint({ contentRef });
+
 
 async function ConfirmPrint(config) {
-  
 
+  
+  
+  /*
   const res = await fetch('/api/labels/register', {
     method:"POST",
     body:JSON.stringify({
@@ -29,6 +38,7 @@ async function ConfirmPrint(config) {
     })
   });
 
+
   const data = await res.json();
   
   if(data){
@@ -36,6 +46,7 @@ async function ConfirmPrint(config) {
   } else{
     console.log("Deu errado")
   }
+  */
   }
 
 useEffect(() => {
@@ -72,7 +83,7 @@ useEffect(() => {
 
           <div className="flex flex-col md:flex-row gap-6">
             <div className="md:w-1/3">
-              <ConfigLabel Print={ConfirmPrint}/>
+              <ConfigLabel Print={() => {ConfirmPrint(), PrintLabel()}}/>
             </div>
             <div className="md:w-2/3">
               <PainelEtiquetasRecentes/>
@@ -80,6 +91,13 @@ useEffect(() => {
           </div>
 
           <SelectProduct produtos={produtosDisponiveis} onSelecionadosChange={setProdutosSelecionados}/>
+          <div className="overflow-hidden hidden bg-amber-500">
+            <div ref={ contentRef } className="flex justify-center items-center w-full h-screen"> {produtosSelecionados.map((p, i) => (
+              <Etiqueta 
+              labelproducts={p}
+              key={i}/>
+            ))} </div>
+          </div>
         </div>
       </div>
     </Providers>

@@ -34,7 +34,7 @@ model User {
   password  String
   cnpj      String   @unique
   phone     String?   @unique
-  addres    String?
+  address   String?
   city      String?
   state     String?
   zipCode   String?

@@ -17,7 +17,6 @@ export default function SelectProduct({ produtos, onSelecionadosChange }) {
     if (typeof onSelecionadosChange === 'function') {
       onSelecionadosChange(novaLista);
     }
-    console.log(selecionados)
   }
 
   const produtosFiltrados = Array.isArray(produtos)

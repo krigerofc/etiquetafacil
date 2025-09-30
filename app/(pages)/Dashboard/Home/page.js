@@ -15,12 +15,14 @@ export default function DashHome() {
     useEffect(() => {
         async function DashData(){
             try{
+                console.log("status:", status, "session:", session);
 
                 const res = await fetch('/api/dashboard/data', {
-                    method: 'POST',
+                    method:"POST",
                     body: JSON.stringify({
-                        userId: session.user.id
+                        userId:session.user.id
                     }),
+                    headers: { "Content-Type": "application/json" },
                 });
 
                 const data = await res.json();
@@ -38,7 +40,7 @@ export default function DashHome() {
         }
 
         DashData();
-    }, [session]);
+    }, [session, status]);
 
     return(
         <Providers>

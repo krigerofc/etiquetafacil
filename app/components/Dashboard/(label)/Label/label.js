@@ -1,28 +1,42 @@
-    export default function Etiqueta() {
+'use client'
+
+import Database from "@/Backend/models/Database";
+import { useSession } from "next-auth/react";
+
+    export default function Etiqueta({ labelproducts }) {
+
+        const {data: session, status} = useSession();
+        const address = `${session.user.address}, ${session.user.zipCode}, ${session.user.state}`
+
+        const date_now = new Date();
+        const result_days = new Date(date_now);
+        result_days.setDate(result_days.getDate() + labelproducts.default_Days);
+
+
         const infoEtiqueta = {
-        produto: "RIGATONI",
-        tipo: "COZIDO / RESFRIADO",
+        produto: labelproducts.name,
+        tipo: labelproducts.description,
         validadeOriginal: "22/06/2024",
-        manipulacao: "10/07/2024 - 14:18:07",
-        validadeFinal: "17/07/2024",
-        marca: "DE CECCO",
-        sif: "2845",
-        responsavel: "EDUARDO",
+        manipulacao: `${date_now.toLocaleDateString('pt-br')} : ${date_now.toLocaleTimeString('pt-br')} `,
+        validadeFinal: `${result_days.toLocaleDateString('pt-br')} : ${result_days.toLocaleTimeString('pt-br')} `,
+        marca: labelproducts.brand,
+        //sif: "2845",
+        responsavel: labelproducts.responsible,
         empresa: {
-            nome: "DELICIAS CASEIRAS",
-            cnpj: "41.093768/0001-62",
-            endereco: "RUA DO MERCADO, 60",
-            cidade: "PORTO ALEGRE - RS"
+            nome: session.user.name,
+            phone: session.user.phone,
+            cnpj: session.user.cnpj,
+            endereco: address,
+            cidade: session.user.city
         },
-        referencia: "#F7201A",
-        qrCodeUrl: "https://example.com"
+        referencia: labelproducts.id,
         };
 
     return (
-        <div className="w-[300px] p-4 border border-black bg-white font-sans text-gray-900 shadow-md space-y-1">
+        <div className="w-[500px] p-6 border border-black bg-white font-sans text-gray-900 shadow-md space-y-1">
         
         {/* Cabeçalho do produto */}
-        <header className="text">
+        <header className="text-base max-w-[450px]">
             <h1 className="text-xl font-bold uppercase">{infoEtiqueta.produto}</h1>
             <p className="text-sm text-gray-700">{infoEtiqueta.tipo}</p>
         </header>
@@ -30,26 +44,26 @@
         <hr className="border-t-2 border-black" />
 
         {/* Informações principais */}
-        <section className="text-sm space-y-0">
-            <p><strong>Val. Original:</strong> 22/06/2024</p>
-            <p><strong>Manipulação:</strong> 10/07/2024 - 14:18:07</p>
-            <p><strong>Validade:</strong> 17/07/2024</p>
-            <p><strong>Marca / Forn:</strong> DE CECCO</p>
+        <section className="space-y-0 text-left text-base max-w-[450px]">
+            {/*<p><strong>Val. Original:</strong> 22/06/2024</p>*/}
+            <p><strong>Manipulação:</strong> {infoEtiqueta.manipulacao} </p>
+            <p><strong>Validade:</strong> {infoEtiqueta.validadeFinal} </p>
+            <p><strong>Marca / Forn:</strong> {infoEtiqueta.marca} </p>
         </section>
 
         <hr className="border-t-2 border-black" />
 
         {/* Responsável */}
-        <section className="text-sm">
-            <p><strong>Resp.:</strong> EDUARDO</p>
-            <p><strong>Phone:</strong> EDUARDO</p>
-            <p><strong>CNPJ:</strong> 41.093768/0001-62</p>
-            <p className="text-sm leading-tight w-[260px]"><strong>Endereço:</strong> DELICIAS CASEIRAS— RUA DO MERCADO, 60 — PORTO ALEGRE - RS</p>
+        <section className="text-base max-w-[450px]">
+            <p className="font-medium"><strong>Resp.:</strong> {infoEtiqueta.responsavel}</p>
+            <p><strong>Phone:</strong> { infoEtiqueta.empresa.phone }</p>
+            <p><strong>CNPJ:</strong> { infoEtiqueta.empresa.cnpj } </p>
+            <p className="text-m leading-tight"><strong>Endereço:</strong> { address} </p>
         </section>
 
         {/* Código de referência */}
         <footer>
-            <p className="text-sm text-center font-mono text-gray-700">id</p>
+            <p className="text-base font-mono text-gray-700 font-bold max-w-[450px]">ID:{infoEtiqueta.referencia}</p>
         </footer>
         </div>
     );

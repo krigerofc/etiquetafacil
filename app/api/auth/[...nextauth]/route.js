@@ -60,7 +60,11 @@ const handler = NextAuth({
         token.cnpj = user.cnpj
         token.name = user.name
         token.email = user.email
-        token.role = user.role
+        token.phone = user.phone
+        token.address = user.address
+        token.city = user.city
+        token.state = user.state
+        token.zipCode = user.zipCode
       }
       return token
     },
@@ -70,6 +74,11 @@ const handler = NextAuth({
       session.user.name = token.name
       session.user.cnpj = token.cnpj
       session.user.email = token.email
+      session.user.phone = token.phone
+      session.user.address = token.address
+      session.user.city = token.city
+      session.user.state = token.state
+      session.user.zipCode = token.zipCode
       return session
     },
   },

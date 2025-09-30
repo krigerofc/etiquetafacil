@@ -20,7 +20,6 @@ export default function PainelEtiquetasRecentes() {
          })
       });
       const data = await res.json();
-      console.log(data)
       setEtiquetas(data.labels || []);
     }
 

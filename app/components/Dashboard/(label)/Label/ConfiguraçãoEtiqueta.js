@@ -8,8 +8,7 @@ export default function ConfigLabel({ Print}) {
   const [quantidade, setQuantidade] = useState(1);
 
   const tamanhosDisponiveis = {
-    termica: ['3x5', '4x6', '5x7'],
-    a4: ['5x7', '6x8', '4x6'],
+    termica: ['5x7'],
   };
 
   function PrePrint() {
@@ -34,7 +33,6 @@ export default function ConfigLabel({ Print}) {
           className="w-full border rounded px-3 py-2"
         >
           <option value="termica">Impressora Térmica</option>
-          <option value="a4">Folha A4</option>
         </select>
       </div>
 
